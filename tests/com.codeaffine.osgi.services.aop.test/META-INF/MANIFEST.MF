@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lean OSGi AOP Implementation Tests
+Bundle-SymbolicName: com.codeaffine.osgi.services.aop.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Codeaffine.com
+Fragment-Host: com.codeaffine.osgi.services.aop;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="4.8.2",
+ org.mockito;bundle-version="1.8.4",
+ org.objenesis;bundle-version="1.0.0",
+ org.hamcrest;bundle-version="1.1.0"

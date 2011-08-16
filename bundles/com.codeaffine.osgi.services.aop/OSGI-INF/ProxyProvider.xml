@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" immediate="true" name="ProxyProvider">
+   <implementation class="com.codeaffine.osgi.services.aop.internal.ProxyProvider"/>
+   <service>
+      <provide interface="org.osgi.framework.hooks.service.FindHook"/>
+   </service>
+   <reference bind="addJoinPointDefinition"
+              cardinality="0..n"
+              interface="com.codeaffine.osgi.services.aop.JoinPointDefinition"
+              name="JoinPointDefinition"
+              policy="dynamic"/>
+</scr:component>
