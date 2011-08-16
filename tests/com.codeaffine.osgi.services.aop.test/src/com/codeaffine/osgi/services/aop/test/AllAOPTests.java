@@ -13,6 +13,6 @@ import com.codeaffine.osgi.services.aop.internal.ProxyRegistrar_Test;
   ProxyRegistrar_Test.class,
   JoinPointImpl_Test.class
 } )
-public class AllProxyTests {
+public class AllAOPTests {
   // no content
 }
