@@ -131,29 +131,31 @@ public class JoinPointImpl<T> implements JoinPoint<T> {
     executeAdvices( method, args, afterAdvices.iterator() );
   }
   
-  public void executeOnError( Method method, Object[] args, Throwable error ) {
+  public Object executeOnError( Method method, Object[] args, Throwable error ) {
     Object[] arguments = args == null ? new Object[ 0 ] : args;
     Object[] argsWithError = new Object[ arguments.length + 1 ];
     System.arraycopy( arguments, 0, argsWithError, 0, arguments.length );
     argsWithError[ arguments.length ] = error;
-    executeAdvices( method, argsWithError, onErrorAdvices.iterator() );
-    
+    return executeAdvices( method, argsWithError, onErrorAdvices.iterator() );
   }  
   
-  private void executeAdvices( Method method, Object[] args, Iterator<AdviceHolder> advices ) {
+  private Object executeAdvices( Method method, Object[] args, Iterator<AdviceHolder> advices ) {
+    Object result = null;
     while( advices.hasNext() ) {
       AdviceHolder holder = advices.next();
       if( holder.getTargetMethod().equals( method ) ) {
-        executeAdvice( holder, args );
+        result = executeAdvice( holder, args );
       }
     }
+    return result;
   }
 
-  private void executeAdvice( AdviceHolder holder, Object[] args ) {
+  private Object executeAdvice( AdviceHolder holder, Object[] args ) {
+    Object result = null;
     try {
       Method adviceMethod = holder.getAdviceMethod();
       adviceMethod.setAccessible( true );
-      adviceMethod.invoke( holder.getAdvice(), args );
+      result = adviceMethod.invoke( holder.getAdvice(), args );
     } catch( IllegalArgumentException e ) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -164,5 +166,6 @@ public class JoinPointImpl<T> implements JoinPoint<T> {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    return result;
   }
 }

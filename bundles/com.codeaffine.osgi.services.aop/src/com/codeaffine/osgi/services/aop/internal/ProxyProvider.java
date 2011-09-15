@@ -72,7 +72,7 @@ public class ProxyProvider implements FindHook {
   }
 
   private boolean hasProxyDefinitionFor( String name ) {
-    synchronized( name ) {
+    synchronized( joinPointDefinitions ) {
       Iterator<JoinPointDefinition<?>> definitions = joinPointDefinitions.keySet().iterator();
       boolean result = false;
       while( !result && definitions.hasNext() ) {

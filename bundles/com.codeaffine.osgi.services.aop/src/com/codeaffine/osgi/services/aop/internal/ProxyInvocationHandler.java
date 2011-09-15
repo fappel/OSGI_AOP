@@ -36,19 +36,24 @@ class ProxyInvocationHandler implements InvocationHandler {
           joinPoint.excuteAfter( method, args );
         }        
       } catch( Throwable error ) {
-        joinPoint.executeOnError( method, args, error );
-        
-        if( error instanceof RuntimeException ) {
-          throw ( RuntimeException )error;
-        } else if( error instanceof InvocationTargetException ) {
-          InvocationTargetException ite = ( InvocationTargetException )error;
-          if( ite.getCause() != null ) {
-            throw ite.getCause();
-          } 
-          throw error;
+        if( error instanceof InvocationTargetException ) {
+          Throwable targetException = ( ( InvocationTargetException ) error ).getTargetException();
+          result = joinPoint.executeOnError( method, args, targetException );
         } else {
-          throw error;
+          result = joinPoint.executeOnError( method, args, error );
         }
+        
+//        if( error instanceof RuntimeException ) {
+//          throw ( RuntimeException )error;
+//        } else if( error instanceof InvocationTargetException ) {
+//          InvocationTargetException ite = ( InvocationTargetException )error;
+//          if( ite.getCause() != null ) {
+//            throw ite.getCause();
+//          } 
+//          throw error;
+//        } else {
+//          throw error;
+//        }
       }
       return result;
     }
