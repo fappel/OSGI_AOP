@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import com.codeaffine.osgi.services.aop.internal.JoinPointImpl_Test;
+import com.codeaffine.osgi.services.aop.internal.ProxyInvocationHandler_Test;
 import com.codeaffine.osgi.services.aop.internal.ProxyProvider_Test;
 import com.codeaffine.osgi.services.aop.internal.ProxyRegistrar_Test;
 
@@ -21,7 +22,8 @@ import com.codeaffine.osgi.services.aop.internal.ProxyRegistrar_Test;
 @Suite.SuiteClasses( {
   ProxyProvider_Test.class,
   ProxyRegistrar_Test.class,
-  JoinPointImpl_Test.class
+  JoinPointImpl_Test.class,
+  ProxyInvocationHandler_Test.class
 } )
 public class AllAOPTests {
   // no content
